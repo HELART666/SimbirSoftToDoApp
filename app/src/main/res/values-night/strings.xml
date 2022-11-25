@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="my_deals">My deals:</string>
+    <string name="deal_name">Deal_name</string>
+    <string name="dealTime">time</string>
+    <string name="dealdesc">dealDesc</string>
+    <string name="enterDate">Выбрать дату</string>
+    <string name="hintName">Введите заголовок</string>
+    <string name="hintDescription">Введите описание</string>
+    <string name="addDealBtnText">Добавить</string>
+</resources>

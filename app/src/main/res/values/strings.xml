@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">SimbirSoftToDoList</string>
+    <string name="my_deals">My deals:</string>
+    <string name="deal_name">Deal_name</string>
+    <string name="dealTime">time</string>
+    <string name="dealdesc">dealDesc</string>
+    <string name="plus">+</string>
+    <string name="enterDate">Выбрать дату</string>
+    <string name="hintName">Введите заголовок</string>
+    <string name="hintDescription">Введите описание</string>
+    <string name="addDealBtnText">Добавить</string>
+    <string name="dateInputError">Проверьте дату и время!</string>
+    <string name="dealNameError">Выберите название Вашего дела!</string>
+    <string name="dealDescriptionError">Выберите описание Вашего дела!</string>
+    <string name="dealListIsEmpty">На сегодня дел нет!</string>
+</resources>

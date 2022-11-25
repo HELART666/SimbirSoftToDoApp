@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_dialog">
+
+    <EditText
+        android:id="@+id/inputDealName"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="@string/hintName"
+        android:textColor="@color/blue"
+        android:backgroundTint="@color/blue"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:fontFamily="@font/roboto_regular" />
+
+    <Button
+        android:id="@+id/setDateBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/enterDate"
+        app:cornerRadius="15dp"
+        app:fontFamily="@font/roboto_regular" />
+
+    <EditText
+        android:id="@+id/inputDescription"
+        android:textCursorDrawable="@drawable/cursor_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="@string/hintDescription"
+        android:textColor="@color/blue"
+        android:backgroundTint="@color/blue"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        app:fontFamily="@font/roboto_regular" />
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginStart="20dp"
+        android:backgroundTint="@color/blue"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/addDealBtnText"
+        app:cornerRadius="15dp"
+        app:fontFamily="@font/roboto_regular" />
+</LinearLayout>
