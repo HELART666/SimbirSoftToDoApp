@@ -51,5 +51,21 @@ class TimeStampConverter {
         val date = formatter.parse(strDate) as Date
         return (date.time / 1000L).toString()
     }
-
+    fun setNullFinishDate(timestamp: Long): Long{
+        return try {
+            val calendar = Calendar.getInstance()
+            calendar.timeInMillis = timestamp * 1000L
+            val time = android.text.format.DateFormat.format("dd-MM-yyyy", calendar).toString().split('-')
+            return setFinishDate(
+                time[1],
+                time[0],
+                time[2],
+                "00",
+                "00",
+                "00",
+            )
+        } catch (e: Exception) {
+            0
+        }
+    }
 }
