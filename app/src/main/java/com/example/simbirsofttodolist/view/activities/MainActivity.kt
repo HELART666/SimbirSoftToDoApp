@@ -40,7 +40,18 @@ class MainActivity : AppCompatActivity() {
         bindingClass = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(bindingClass.root)
+        val db = DealsDB.getDB(this)
+        var clickDay = Calendar.getInstance().timeInMillis / 1000
 
+        if(adapter.itemCount != 0){
+            bindingClass.apply {
+                setGoneImage()
+            }
+        } else{
+            bindingClass.apply {
+                setVisibleImage()
+            }
+        }
 
         dealModel.deal.observe(this) {
             val time =
@@ -50,44 +61,32 @@ class MainActivity : AppCompatActivity() {
                     .DateFormat
                     .format("dd-MM-yyyy", it.dateFinish * 1000L).toString().split('-')
             if(time[0] == LocalDateTime.now().dayOfMonth.toString()){
-                setGoneImage()
-                adapter.addAllDeals(Deal(it.id, it.dateStart, it.dateFinish, it.name, it.description))
+                adapter.clearList()
+                db.getDao().getDealsForDate(
+                    timeStampConverter.setNullFinishDate(clickDay),
+                    timeStampConverter.getDate(clickDay)
+                ).asLiveData()
+                    .observe(this@MainActivity){ list ->
+                        checkItems()
+                        if(list.isNotEmpty()){
+                            list.forEach {
+                                setGoneImage()
+                                adapter.addAllDeals(Deal(it.id, it.dateStart, it.dateFinish, it.name, it.description))
+                            }
+                        } else{
+                            bindingClass.apply {
+                                setVisibleImage()
+                            }
+                        }
+                    }
             }
+            //Toast.makeText(this, "${timeStampConverter.setNullFinishDate(clickDay)}", Toast.LENGTH_LONG).show()
+            //Toast.makeText(this, "${timeStampConverter.getDate(clickDay)}", Toast.LENGTH_LONG).show()
+
             checkItems()
         }
-        val db = DealsDB.getDB(this)
+
         checkItems()
-
-        db.getDao().getDealsForDate(
-            timeStampConverter.setFinishDate(
-                LocalDateTime.now().monthValue.toString(),
-                LocalDateTime.now().dayOfMonth.toString(),
-                LocalDateTime.now().year.toString(),
-            ),
-            timeStampConverter.setFinishDate(
-                LocalDateTime.now().monthValue.toString(),
-                LocalDateTime.now().dayOfMonth.toString(),
-                LocalDateTime.now().year.toString(),
-                "23",
-                "59",
-                "59",
-            ),
-        ).asLiveData().observe(this){ list ->
-            if(list.isNotEmpty() && flag){
-                flag = false
-                list.forEach {
-                    bindingClass.apply {
-                        setGoneImage()
-                        adapter.addAllDeals(Deal(it.id, it.dateStart, it.dateFinish, it.name, it.description))
-                    }
-
-                }
-            } else if(list.isEmpty()){
-                bindingClass.apply {
-                    setVisibleImage()
-                }
-            }
-        }
 
         val swipeToDeleteCallback = object : SwipeToDeleteCallback(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -120,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 
             calendarView.setOnDayClickListener(object : OnDayClickListener {
                 override fun onDayClick(eventDay: EventDay) {
-                    val clickDay = eventDay.calendar.timeInMillis / 1000
+                    clickDay = eventDay.calendar.timeInMillis / 1000
 
                 adapter.clearList()
                 db.getDao().getDealsForDate(
